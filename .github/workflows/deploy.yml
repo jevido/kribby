@@ -8,7 +8,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      SSH_PRIVATE_KEY: ${{ secrets.BAKERY_KEY }}
+      SSH_PRIVATE_KEY: ${{ secrets.BAKERY_SSH_KEY }}
       SSH_USER: root
       SSH_HOST: jevido.wtf
       APP_DOMAIN: kribby.jevido.wtf
