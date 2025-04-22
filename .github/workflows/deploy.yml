@@ -17,12 +17,17 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Deploy to Bakery
+      - name: Setup SSH
         run: |
-          RELEASE=$(date +%s)
           echo "$SSH_PRIVATE_KEY" > key.pem
           chmod 600 key.pem
           mkdir -p ~/.ssh
           ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
-          rsync --delete -e "ssh -i key.pem" -az ./ $SSH_USER@$SSH_HOST:/srv/bakery/apps/$APP_DOMAIN/current
+
+      - name: Upload build to server
+        run: |
+          rsync -az --delete -e "ssh -i key.pem" ./ $SSH_USER@$SSH_HOST:/srv/bakery/apps/$APP_DOMAIN/current
+
+      - name: Deploy on server
+        run: |
           ssh -i key.pem $SSH_USER@$SSH_HOST "bakery deploy $APP_DOMAIN"
