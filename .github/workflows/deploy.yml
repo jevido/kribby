@@ -21,7 +21,7 @@ jobs:
         run: |
           echo "$SSH_PRIVATE_KEY" > key.pem
           chmod 600 key.pem
-          echo "$SSH_PRIVATE_KEY"
+          echo key.pem
           mkdir -p ~/.ssh
           ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
           rsync -e "ssh -i key.pem" -az ./ $SSH_USER@$SSH_HOST:/srv/bakery/apps/$APP_DOMAIN
