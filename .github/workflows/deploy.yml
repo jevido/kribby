@@ -26,7 +26,7 @@ jobs:
 
       - name: Upload build to server
         run: |
-          rsync -az --delete -e "ssh -i key.pem" ./ $SSH_USER@$SSH_HOST:/srv/bakery/apps/$APP_DOMAIN/current
+          rsync -az --mkpath --delete -e "ssh -i key.pem" ./ $SSH_USER@$SSH_HOST:/srv/bakery/apps/$APP_DOMAIN/current
 
       - name: Deploy on server
         run: |
