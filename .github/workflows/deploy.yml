@@ -19,7 +19,7 @@ jobs:
 
       - name: Deploy to Bakery
         run: |
-          echo $SSH_PRIVATE_KEY > key.pem
+          echo "$SSH_PRIVATE_KEY" > key.pem
           chmod 600 key.pem
           mkdir -p ~/.ssh
           ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
