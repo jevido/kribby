@@ -23,5 +23,5 @@ jobs:
           chmod 600 key.pem
           mkdir -p ~/.ssh
           ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
-          rsync -e "ssh -i key.pem" -az ./ $SSH_USER@$SSH_HOST:/srv/bakery/apps/$APP_DOMAIN
+          rsync -e "ssh -i key.pem" -az ./ $SSH_USER@$SSH_HOST:/srv/bakery/apps/$APP_DOMAIN/releases/$RELEASE
           ssh -i key.pem $SSH_USER@$SSH_HOST "bakery deploy $APP_DOMAIN"
