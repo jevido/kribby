@@ -14,7 +14,7 @@ jobs:
       - name: Deploy via SSH
         env:
           SSH_PRIVATE_KEY: ${{ secrets.BAKERY_SSH_KEY }}
-          SSH_HOST: satsuma.jevido.wtf
+          SSH_HOST: jevido.wtf
           APP_DOMAIN: kribby.jevido.wtf
         run: |
           echo "$SSH_PRIVATE_KEY" > key.pem
