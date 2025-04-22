@@ -8,22 +8,20 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-          ssh-private-key: ${{ secrets.BAKERY_SSH_KEY }}
-          ssh-user: root
-          ssh-host: jevido.wtf
-          app-domain: kribby.jevido.wtf
+      SSH_PRIVATE_KEY: ${{ secrets.BAKERY_SSH_KEY }}
+      SSH_USER: root
+      SSH_HOST: jevido.wtf
+      APP_DOMAIN: kribby.jevido.wtf
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
 
       - name: Deploy to Bakery
-        
         run: |
-          echo "$ssh-private-key" > key.pem
+          echo "$SSH_PRIVATE_KEY" > key.pem
           chmod 600 key.pem
           mkdir -p ~/.ssh
-          ssh-keyscan -H $ssh-host >> ~/.ssh/known_hosts
-          rsync -e "ssh -i key.pem" -az ./ $ssh-user@$ssh-host:/srv/bakery/apps/$app-domain
-          ssh -i key.pem $ssh-user@$ssh-host "bakery deploy $app-domain"
-      
+          ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
+          rsync -e "ssh -i key.pem" -az ./ $SSH_USER@$SSH_HOST:/srv/bakery/apps/$APP_DOMAIN
+          ssh -i key.pem $SSH_USER@$SSH_HOST "bakery deploy $APP_DOMAIN"
