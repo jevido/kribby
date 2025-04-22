@@ -19,9 +19,10 @@ jobs:
 
       - name: Deploy to Bakery
         run: |
+          RELEASE=$(date +%s)
           echo "$SSH_PRIVATE_KEY" > key.pem
           chmod 600 key.pem
           mkdir -p ~/.ssh
           ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
-          rsync -e "ssh -i key.pem" -az ./ $SSH_USER@$SSH_HOST:/srv/bakery/apps/$APP_DOMAIN/releases/$RELEASE
+          rsync --delete -e "ssh -i key.pem" -az ./ $SSH_USER@$SSH_HOST:/srv/bakery/apps/$APP_DOMAIN/current
           ssh -i key.pem $SSH_USER@$SSH_HOST "bakery deploy $APP_DOMAIN"
