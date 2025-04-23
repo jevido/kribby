@@ -8,9 +8,9 @@
 		"preview": "vite preview"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-auto": "^1.0.0",
 		"@sveltejs/kit": "^1.0.0",
 		"svelte": "^3.54.0",
+		"svelte-adapter-bun": "^0.5.2",
 		"vite": "^4.0.0"
 	},
 	"type": "module"
