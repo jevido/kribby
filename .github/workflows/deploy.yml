@@ -10,8 +10,8 @@ jobs:
     env:
       SSH_PRIVATE_KEY: ${{ secrets.BAKERY_SSH_KEY }}
       SSH_USER: root
-      SSH_HOST: jevido.wtf
-      APP_DOMAIN: kribby.jevido.wtf
+      SSH_HOST: jevido.nl
+      APP_DOMAIN: kribby.jevido.nl
 
     steps:
       - name: Checkout repo
